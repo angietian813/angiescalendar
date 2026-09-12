@@ -1,25 +1,28 @@
 /* CSS Variables */
 :root {
-    --primary-blue: #4A90D9;
-    --light-blue: #E8F4FD;
-    --lighter-blue: #F5FAFF;
+    --primary-blue: #A8D5E2;
+    --medium-blue: #7BAFD4;
+    --dark-blue: #5A8CAF;
+    --light-blue: #D4EBF7;
+    --lighter-blue: #EBF5FA;
+    --cream: #FFF8F0;
     --white: #FFFFFF;
-    --text-dark: #2C3E50;
-    --text-medium: #5A6C7D;
-    --text-light: #8FA3B4;
-    --border-color: #D4E5F7;
-    --shadow: 0 2px 8px rgba(74, 144, 217, 0.1);
-    --shadow-hover: 0 4px 16px rgba(74, 144, 217, 0.15);
+    --text-dark: #4A5568;
+    --text-medium: #6B7280;
+    --text-light: #9CA3AF;
+    --border-color: #B8D4E3;
+    --shadow: 0 3px 10px rgba(168, 213, 226, 0.2);
+    --shadow-hover: 0 5px 20px rgba(168, 213, 226, 0.3);
     
     /* Category Colors */
-    --work-color: #4A90D9;
-    --personal-color: #7B68EE;
-    --school-color: #20B2AA;
+    --work-color: #7BAFD4;
+    --personal-color: #A89DD9;
+    --school-color: #87C9C6;
     
     /* Priority Colors */
-    --high-priority: #E74C3C;
-    --medium-priority: #F39C12;
-    --low-priority: #27AE60;
+    --high-priority: #E89BA7;
+    --medium-priority: #F5C18E;
+    --low-priority: #9BC99D;
 }
 
 /* Reset & Base Styles */
@@ -29,11 +32,31 @@
     box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Patrick+Hand&family=Indie+Flower&family=Architects+Daughter&family=Kalam:wght@300;400;700&display=swap');
+
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, var(--lighter-blue) 0%, var(--light-blue) 100%);
+    font-family: 'Kalam', 'Comic Sans MS', cursive;
+    background: #E8F0F7;
+    background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(168, 213, 226, 0.03) 2px, rgba(168, 213, 226, 0.03) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(168, 213, 226, 0.03) 2px, rgba(168, 213, 226, 0.03) 4px);
     min-height: 100vh;
     color: var(--text-dark);
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(168, 213, 226, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(135, 201, 198, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* App Container */
@@ -41,6 +64,8 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 /* Header */
@@ -48,20 +73,51 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
-    margin-bottom: 20px;
+    padding: 30px 20px;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px dashed var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(168, 213, 226, 0.15);
+    position: relative;
 }
 
-.header h1 {
-    font-size: 28px;
-    font-weight: 700;
+.header::before {
+    content: '✿';
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    font-size: 30px;
     color: var(--primary-blue);
 }
 
+.header::after {
+    content: '✿';
+    position: absolute;
+    bottom: -15px;
+    right: 20px;
+    font-size: 30px;
+    color: var(--medium-blue);
+}
+
+.header h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--medium-blue);
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
+}
+
 .current-date {
+    font-family: 'Patrick Hand', cursive;
     font-size: 16px;
     color: var(--text-medium);
-    font-weight: 500;
+    font-weight: 400;
+    background: rgba(168, 213, 226, 0.2);
+    padding: 8px 16px;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
 }
 
 /* Dashboard Layout */
@@ -80,54 +136,85 @@ body {
 /* Section Styles */
 .calendar-section,
 .tasks-section {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 24px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    padding: 30px;
     box-shadow: var(--shadow);
+    border: 3px solid var(--border-color);
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.calendar-section::before,
+.tasks-section::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 1px dashed rgba(168, 213, 226, 0.3);
+    border-radius: 15px;
+    pointer-events: none;
 }
 
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px dotted var(--border-color);
 }
 
 .section-header h2 {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text-dark);
+    font-family: 'Caveat', cursive;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--dark-blue);
+    position: relative;
+}
+
+.section-header h2::after {
+    content: '~';
+    margin-left: 10px;
+    color: var(--primary-blue);
 }
 
 /* View Toggle Buttons */
 .view-toggle {
     display: flex;
-    gap: 4px;
-    background: var(--lighter-blue);
-    padding: 4px;
-    border-radius: 8px;
+    gap: 6px;
+    background: rgba(168, 213, 226, 0.15);
+    padding: 6px;
+    border-radius: 15px;
+    border: 2px solid var(--border-color);
 }
 
 .view-btn {
-    padding: 8px 16px;
-    border: none;
+    padding: 8px 18px;
+    border: 2px solid transparent;
     background: transparent;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
+    border-radius: 12px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 15px;
+    font-weight: 400;
     color: var(--text-medium);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .view-btn.active {
     background: var(--white);
-    color: var(--primary-blue);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    color: var(--dark-blue);
+    border-color: var(--medium-blue);
+    box-shadow: 0 2px 8px rgba(123, 175, 212, 0.2);
+    transform: translateY(-1px);
 }
 
 .view-btn:hover:not(.active) {
-    color: var(--primary-blue);
+    color: var(--medium-blue);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 /* Calendar Controls */
@@ -136,102 +223,122 @@ body {
     align-items: center;
     justify-content: center;
     gap: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: rgba(168, 213, 226, 0.08);
+    border-radius: 15px;
 }
 
 .nav-btn {
-    width: 36px;
-    height: 36px;
-    border: none;
-    background: var(--lighter-blue);
-    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--border-color);
+    background: var(--white);
+    border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-blue);
-    transition: all 0.2s ease;
+    color: var(--medium-blue);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(168, 213, 226, 0.2);
 }
 
 .nav-btn:hover {
-    background: var(--light-blue);
+    background: var(--primary-blue);
+    color: var(--white);
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(168, 213, 226, 0.3);
 }
 
 .calendar-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text-dark);
-    min-width: 180px;
+    font-family: 'Indie Flower', cursive;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--dark-blue);
+    min-width: 200px;
     text-align: center;
 }
 
 .today-btn {
-    padding: 8px 16px;
-    border: 2px solid var(--primary-blue);
-    background: transparent;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--primary-blue);
+    padding: 10px 20px;
+    border: 2px solid var(--medium-blue);
+    background: var(--white);
+    border-radius: 20px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--medium-blue);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(168, 213, 226, 0.2);
 }
 
 .today-btn:hover {
-    background: var(--primary-blue);
+    background: var(--medium-blue);
     color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(123, 175, 212, 0.3);
 }
 
 /* Calendar Grid */
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
+    gap: 8px;
 }
 
 .day-header {
     padding: 12px 8px;
     text-align: center;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-medium);
-    text-transform: uppercase;
+    font-family: 'Architects Daughter', cursive;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--medium-blue);
+    text-transform: lowercase;
     letter-spacing: 0.5px;
+    background: rgba(168, 213, 226, 0.1);
+    border-radius: 10px;
 }
 
 .day-cell {
     min-height: 100px;
-    padding: 8px;
-    background: var(--lighter-blue);
-    border-radius: 8px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     position: relative;
 }
 
 .day-cell:hover {
-    background: var(--light-blue);
-    transform: translateY(-1px);
+    background: rgba(212, 235, 247, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(168, 213, 226, 0.25);
+    border-color: var(--medium-blue);
 }
 
 .day-cell.today {
-    background: var(--light-blue);
-    border: 2px solid var(--primary-blue);
+    background: rgba(168, 213, 226, 0.25);
+    border: 3px solid var(--medium-blue);
+    box-shadow: 0 0 0 3px rgba(123, 175, 212, 0.1);
 }
 
 .day-cell.other-month {
-    opacity: 0.4;
+    opacity: 0.35;
 }
 
 .day-number {
-    font-size: 14px;
-    font-weight: 600;
+    font-family: 'Indie Flower', cursive;
+    font-size: 16px;
+    font-weight: 700;
     color: var(--text-dark);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
 .day-cell.today .day-number {
-    color: var(--primary-blue);
+    color: var(--dark-blue);
 }
 
 .event-dot {
@@ -247,14 +354,16 @@ body {
 .event-dot.school { background: var(--school-color); }
 
 .event-preview {
+    font-family: 'Patrick Hand', cursive;
     font-size: 11px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    margin-top: 2px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    margin-top: 4px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .event-preview.work { background: var(--work-color); }
@@ -273,7 +382,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(168, 213, 226, 0.4);
+    backdrop-filter: blur(5px);
     display: none;
     align-items: center;
     justify-content: center;
@@ -286,65 +396,92 @@ body {
 }
 
 .modal {
-    background: var(--white);
-    border-radius: 16px;
+    background: var(--cream);
+    border-radius: 20px;
     width: 100%;
-    max-width: 440px;
+    max-width: 460px;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 60px rgba(90, 140, 175, 0.3);
+    border: 3px solid var(--border-color);
+    position: relative;
+}
+
+.modal::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 1px dashed rgba(168, 213, 226, 0.4);
+    border-radius: 15px;
+    pointer-events: none;
 }
 
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--border-color);
+    padding: 24px 28px;
+    border-bottom: 2px dotted var(--border-color);
+    position: relative;
+    z-index: 1;
 }
 
 .modal-header h3 {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text-dark);
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--dark-blue);
 }
 
 .close-btn {
-    width: 32px;
-    height: 32px;
-    border: none;
-    background: var(--lighter-blue);
-    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--border-color);
+    background: var(--white);
+    border-radius: 50%;
     font-size: 24px;
     color: var(--text-medium);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .close-btn:hover {
-    background: var(--light-blue);
-    color: var(--text-dark);
+    background: var(--primary-blue);
+    color: var(--white);
+    transform: rotate(90deg);
+    border-color: var(--medium-blue);
 }
 
 /* Form Styles */
 #eventForm,
 #taskForm {
-    padding: 24px;
+    padding: 28px;
+    position: relative;
+    z-index: 1;
 }
 
 .form-group {
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 }
 
 .form-group label {
     display: block;
-    font-size: 14px;
-    font-weight: 500;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 16px;
+    font-weight: 400;
     color: var(--text-medium);
     margin-bottom: 8px;
+}
+
+.form-group label::before {
+    content: '◦ ';
+    color: var(--primary-blue);
 }
 
 .form-group input,
@@ -352,18 +489,20 @@ body {
     width: 100%;
     padding: 12px 16px;
     border: 2px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 14px;
+    border-radius: 12px;
+    font-family: 'Kalam', cursive;
+    font-size: 15px;
     color: var(--text-dark);
-    transition: all 0.2s ease;
-    background: var(--white);
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.1);
+    border-color: var(--medium-blue);
+    box-shadow: 0 0 0 4px rgba(168, 213, 226, 0.15);
+    background: var(--white);
 }
 
 .form-row {
@@ -382,22 +521,26 @@ body {
 .btn-secondary {
     flex: 1;
     padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
+    border-radius: 20px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 16px;
+    font-weight: 400;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .btn-primary {
-    background: var(--primary-blue);
-    border: none;
+    background: var(--medium-blue);
+    border: 2px solid var(--medium-blue);
     color: var(--white);
+    box-shadow: 0 4px 10px rgba(123, 175, 212, 0.3);
 }
 
 .btn-primary:hover {
-    background: #3A7BC8;
-    transform: translateY(-1px);
+    background: var(--dark-blue);
+    border-color: var(--dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(90, 140, 175, 0.4);
 }
 
 .btn-secondary {
@@ -407,8 +550,9 @@ body {
 }
 
 .btn-secondary:hover {
-    border-color: var(--primary-blue);
-    color: var(--primary-blue);
+    border-color: var(--medium-blue);
+    color: var(--medium-blue);
+    background: rgba(168, 213, 226, 0.1);
 }
 
 /* Task Section Styles */
@@ -416,36 +560,53 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 16px;
-    border: none;
-    background: var(--primary-blue);
+    padding: 10px 20px;
+    border: 2px solid var(--medium-blue);
+    background: var(--medium-blue);
     color: var(--white);
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
+    border-radius: 20px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 16px;
+    font-weight: 400;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(123, 175, 212, 0.3);
 }
 
 .add-task-btn:hover {
-    background: #3A7BC8;
-    transform: translateY(-1px);
+    background: var(--dark-blue);
+    border-color: var(--dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(90, 140, 175, 0.4);
 }
 
 /* Progress Bar */
 .progress-container {
-    background: var(--lighter-blue);
-    border-radius: 12px;
-    padding: 16px;
+    background: rgba(168, 213, 226, 0.15);
+    border: 2px solid var(--border-color);
+    border-radius: 15px;
+    padding: 18px;
     margin-bottom: 20px;
+    position: relative;
+}
+
+.progress-container::before {
+    content: '♡';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    color: var(--primary-blue);
+    opacity: 0.5;
 }
 
 .progress-info {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-    font-size: 14px;
-    font-weight: 500;
+    margin-bottom: 12px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 15px;
+    font-weight: 400;
 }
 
 #progressText {
@@ -453,53 +614,90 @@ body {
 }
 
 #progressPercent {
-    color: var(--primary-blue);
+    color: var(--dark-blue);
+    font-weight: 700;
 }
 
 .progress-bar {
-    height: 8px;
-    background: var(--white);
-    border-radius: 4px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
     overflow: hidden;
 }
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--primary-blue), #6BA3E0);
-    border-radius: 4px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--medium-blue));
+    border-radius: 8px;
     width: 0%;
-    transition: width 0.3s ease;
+    transition: width 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.2) 75%,
+        transparent 75%,
+        transparent
+    );
+    background-size: 20px 20px;
+    animation: progress-stripes 1s linear infinite;
+}
+
+@keyframes progress-stripes {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 20px 20px;
+    }
 }
 
 /* Task Filters */
 .task-filters {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
 .filter-btn {
-    padding: 8px 16px;
+    padding: 8px 18px;
     border: 2px solid var(--border-color);
-    background: var(--white);
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 500;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 18px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 14px;
+    font-weight: 400;
     color: var(--text-medium);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .filter-btn:hover {
-    border-color: var(--primary-blue);
-    color: var(--primary-blue);
+    border-color: var(--medium-blue);
+    color: var(--medium-blue);
+    background: rgba(168, 213, 226, 0.15);
 }
 
 .filter-btn.active {
-    background: var(--primary-blue);
-    border-color: var(--primary-blue);
+    background: var(--medium-blue);
+    border-color: var(--medium-blue);
     color: var(--white);
+    box-shadow: 0 3px 8px rgba(123, 175, 212, 0.3);
 }
 
 /* Task List */
@@ -514,47 +712,70 @@ body {
 .task-item {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     padding: 16px;
-    background: var(--lighter-blue);
-    border-radius: 12px;
-    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid var(--border-color);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.task-item::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    bottom: 5px;
+    width: 3px;
+    background: linear-gradient(180deg, var(--primary-blue), var(--medium-blue));
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .task-item:hover {
-    background: var(--light-blue);
+    background: rgba(212, 235, 247, 0.4);
+    transform: translateX(2px);
+    box-shadow: 0 3px 10px rgba(168, 213, 226, 0.2);
+}
+
+.task-item:hover::before {
+    opacity: 1;
 }
 
 .task-item.completed {
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
 .task-checkbox {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     border: 2px solid var(--border-color);
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    background: var(--white);
 }
 
 .task-checkbox:hover {
-    border-color: var(--primary-blue);
+    border-color: var(--medium-blue);
+    background: rgba(168, 213, 226, 0.1);
 }
 
 .task-checkbox.checked {
-    background: var(--primary-blue);
-    border-color: var(--primary-blue);
+    background: var(--medium-blue);
+    border-color: var(--medium-blue);
 }
 
 .task-checkbox.checked::after {
     content: '✓';
     color: var(--white);
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -564,10 +785,11 @@ body {
 }
 
 .task-name {
-    font-size: 15px;
-    font-weight: 500;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 16px;
+    font-weight: 400;
     color: var(--text-dark);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
 .task-item.completed .task-name {
@@ -576,9 +798,11 @@ body {
 
 .task-meta {
     display: flex;
-    gap: 12px;
+    gap: 10px;
+    font-family: 'Kalam', cursive;
     font-size: 12px;
     color: var(--text-light);
+    flex-wrap: wrap;
 }
 
 .task-meta span {
@@ -589,68 +813,79 @@ body {
 
 .priority-badge {
     display: inline-block;
-    padding: 4px 10px;
+    padding: 4px 12px;
     border-radius: 12px;
+    font-family: 'Architects Daughter', cursive;
     font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
+    font-weight: 400;
+    text-transform: lowercase;
+    border: 1px solid;
 }
 
 .priority-badge.high {
-    background: rgba(231, 76, 60, 0.1);
+    background: rgba(232, 155, 167, 0.15);
     color: var(--high-priority);
+    border-color: var(--high-priority);
 }
 
 .priority-badge.medium {
-    background: rgba(243, 156, 18, 0.1);
+    background: rgba(245, 193, 142, 0.15);
     color: var(--medium-priority);
+    border-color: var(--medium-priority);
 }
 
 .priority-badge.low {
-    background: rgba(39, 174, 96, 0.1);
+    background: rgba(155, 201, 157, 0.15);
     color: var(--low-priority);
+    border-color: var(--low-priority);
 }
 
 .category-tag {
     display: inline-block;
-    padding: 4px 10px;
+    padding: 4px 12px;
     border-radius: 12px;
+    font-family: 'Architects Daughter', cursive;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 400;
+    border: 1px solid;
 }
 
 .category-tag.work {
-    background: rgba(74, 144, 217, 0.1);
+    background: rgba(123, 175, 212, 0.15);
     color: var(--work-color);
+    border-color: var(--work-color);
 }
 
 .category-tag.personal {
-    background: rgba(123, 104, 238, 0.1);
+    background: rgba(168, 157, 217, 0.15);
     color: var(--personal-color);
+    border-color: var(--personal-color);
 }
 
 .category-tag.school {
-    background: rgba(32, 178, 170, 0.1);
+    background: rgba(135, 201, 198, 0.15);
     color: var(--school-color);
+    border-color: var(--school-color);
 }
 
 .task-delete {
-    width: 32px;
-    height: 32px;
-    border: none;
+    width: 34px;
+    height: 34px;
+    border: 2px solid transparent;
     background: transparent;
-    border-radius: 6px;
+    border-radius: 50%;
     cursor: pointer;
     color: var(--text-light);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .task-delete:hover {
-    background: rgba(231, 76, 60, 0.1);
+    background: rgba(232, 155, 167, 0.15);
     color: var(--high-priority);
+    border-color: var(--high-priority);
 }
 
 /* Empty State */
@@ -761,5 +996,162 @@ body {
     
     .calendar-grid {
         gap: 2px;
+    }
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: var(--text-light);
+}
+
+.empty-state svg {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    opacity: 0.4;
+}
+
+.empty-state p {
+    font-family: 'Indie Flower', cursive;
+    font-size: 16px;
+}
+
+/* Scrollbar Styles */
+.task-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.task-list::-webkit-scrollbar-track {
+    background: rgba(168, 213, 226, 0.1);
+    border-radius: 4px;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.task-list::-webkit-scrollbar-thumb:hover {
+    background: var(--medium-blue);
+}
+
+/* Decorative Elements */
+.calendar-section::after {
+    content: '☆';
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: var(--primary-blue);
+    opacity: 0.3;
+}
+
+.tasks-section::after {
+    content: '♪';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: var(--primary-blue);
+    opacity: 0.3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body::before {
+        background-size: 150px 150px;
+    }
+    
+    .app-container {
+        padding: 16px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+        padding: 20px 15px;
+    }
+    
+    .header h1 {
+        font-size: 36px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    
+    .section-header h2 {
+        font-size: 28px;
+    }
+    
+    .calendar-controls {
+        flex-wrap: wrap;
+    }
+    
+    .calendar-title {
+        order: -1;
+        width: 100%;
+        margin-bottom: 8px;
+        font-size: 20px;
+    }
+    
+    .day-cell {
+        min-height: 80px;
+        padding: 8px;
+    }
+    
+    .day-number {
+        font-size: 14px;
+    }
+    
+    .event-preview {
+        font-size: 10px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .task-filters {
+        justify-content: flex-start;
+    }
+    
+    .filter-btn {
+        font-size: 13px;
+        padding: 7px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 32px;
+    }
+    
+    .day-header {
+        font-size: 11px;
+        padding: 8px 4px;
+    }
+    
+    .day-cell {
+        min-height: 60px;
+        padding: 6px;
+    }
+    
+    .calendar-grid {
+        gap: 4px;
+    }
+    
+    .nav-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .modal {
+        max-width: 95%;
     }
 }
